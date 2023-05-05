@@ -19,7 +19,7 @@ X = data[features]
 y = data[target]
 
 # Binarize the target variable based on the threshold of 2.0 FG3M
-y = y.apply(lambda x: 1 if x > 2.0 else 0)
+y = y.apply(lambda x: 1 if x > 2.5 else 0)
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
@@ -45,19 +45,19 @@ conf_matrix = confusion_matrix(y_test, predictions)
 sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='Blues')
 plt.xlabel('Predicted')
 plt.ylabel('True')
-plt.title('Confusion Matrix - Will Devin Booker get Over 2.0 FG3M?')
+plt.title('Confusion Matrix - Will Devin Booker get Over 2.5 FG3M?')
 plt.show()
 
 # Input the feature values for today's game
 # Replace these values with the relevant data for the game
 today_game = {
-    'HOME': 0,  # 1 for home, 0 for away
-    'AST': 7.4,   # Average assists
-    'STL': 2.0,   # Average steals
-    'REB': 5.6,   # Average rebounds
-    'TOV': 2.6,   # Average turnovers
-    'PTS': 37.4,  # Average made 3-point field goals
-    'FG3A': 5.6,  # Average attempted 3-point field goals
+    'HOME': 1,  # 1 for home, 0 for away
+    'AST': 6.8,   # Average assists
+    'STL': 1.8,   # Average steals
+    'REB': 6.4,   # Average rebounds
+    'TOV': 2.4,   # Average turnovers
+    'PTS': 26.8,  # Average made 3-point field goals
+    'FG3A': 5.8,  # Average attempted 3-point field goals
     'BLK': 0.8    # Average blocks
 }
 

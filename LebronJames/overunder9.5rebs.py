@@ -12,14 +12,14 @@ data['GAME_DATE'] = pd.to_datetime(data['GAME_DATE'])
 data['HOME'] = data['MATCHUP'].apply(lambda x: 1 if 'vs.' in x else 0)
 data['OPPONENT'] = data['MATCHUP'].apply(lambda x: x.split()[-1])
 
-features = ['HOME', 'AST', 'STL', 'REB', 'TOV', 'FG3M', 'FG3A', 'BLK']
-target = 'PTS'
+features = ['HOME', 'AST', 'STL', 'PTS', 'TOV', 'FG3M', 'FG3A', 'BLK']
+target = 'REB'
 
 X = data[features]
 y = data[target]
 
-# Binarize the target variable based on the threshold of 26.5 Points
-y = y.apply(lambda x: 1 if x > 26.5 else 0)
+# Binarize the target variable based on the threshold of 9.5 rebounds
+y = y.apply(lambda x: 1 if x > 9.5 else 0)
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
@@ -45,20 +45,20 @@ conf_matrix = confusion_matrix(y_test, predictions)
 sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='Blues')
 plt.xlabel('Predicted')
 plt.ylabel('True')
-plt.title('Confusion Matrix - Will LeBron James get Over 26.5 Points?')
+plt.title('Confusion Matrix - Will LeBron James get Over 9.5 rebounds?')
 plt.show()
 
 # Input the feature values for today's game
 # Replace these values with the relevant data for the game
 today_game = {
     'HOME': 0,  # 1 for home, 0 for away
-    'AST': 5.2,   # Average assists
-    'STL': 0.8,   # Average steals
-    'REB': 11.2,   # Average rebounds
-    'TOV': 2.6,   # Average turnovers
+    'AST': 5.4,   # Average assists
+    'STL': 0.6,   # Average steals
+    'PTS': 21.0,   # Average rebounds
+    'TOV': 3.2,   # Average turnovers
     'FG3M': 1.0,  # Average made 3-point field goals
     'FG3A': 6.6,  # Average attempted 3-point field goals
-    'BLK': 1.0    # Average blocks
+    'BLK': 1.4    # Average blocks
 }
 
 # Convert the dictionary to a DataFrame
@@ -69,6 +69,6 @@ today_game_prediction = logistic_regression_model.predict(today_game_df)
 
 # Interpret the prediction
 if today_game_prediction[0] == 1:
-    print("The model predicts that LeBron James will score over 26.5 Points in today's game.")
+    print("The model predicts that LeBron James will score over 9.5 rebounds in today's game.")
 else:
-    print("The model predicts that LeBron James will score under 26.5 Points in today's game.")
+    print("The model predicts that LeBron James will score under 9.5 rebounds in today's game.")

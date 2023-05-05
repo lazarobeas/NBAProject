@@ -19,7 +19,7 @@ X = data[features]
 y = data[target]
 
 # Binarize the target variable based on the threshold of 30.5 points
-y = y.apply(lambda x: 1 if x > 29.5 else 0)
+y = y.apply(lambda x: 1 if x > 28.5 else 0)
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
@@ -45,20 +45,20 @@ conf_matrix = confusion_matrix(y_test, predictions)
 sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='Blues')
 plt.xlabel('Predicted')
 plt.ylabel('True')
-plt.title('Confusion Matrix - Will Jayson Tatum get Over 29.5 Points?')
+plt.title('Confusion Matrix - Will Jayson Tatum get Over 28.5 Points?')
 plt.show()
 
 # Input the feature values for today's game
 # Replace these values with the relevant data for the game
 today_game = {
-    'HOME': 1,  # 1 for home, 0 for away
-    'AST': 5.8,   # Average assists
-    'STL': 0.8,   # Average steals
-    'REB': 10.0,   # Average rebounds
-    'TOV': 2.0,   # Average turnovers
-    'FG3M': 3.4,  # Average made 3-point field goals
-    'FG3A': 9.8,  # Average attempted 3-point field goals
-    'BLK': 1.4    # Average blocks
+    'HOME': 0,  # 1 for home, 0 for away
+    'AST': 5.4,   # Average assists
+    'STL': 0.4,   # Average steals
+    'REB': 9.4,   # Average rebounds
+    'TOV': 1.6,   # Average turnovers
+    'FG3M': 2.6,  # Average made 3-point field goals
+    'FG3A': 8.2,  # Average attempted 3-point field goals
+    'BLK': 1.6    # Average blocks
 }
 
 # Convert the dictionary to a DataFrame
@@ -69,6 +69,6 @@ today_game_prediction = logistic_regression_model.predict(today_game_df)
 
 # Interpret the prediction
 if today_game_prediction[0] == 1:
-    print("The model predicts that Jayson Tatum will score over 29.5 Points in today's game.")
+    print("The model predicts that Jayson Tatum will score over 28.5 Points in today's game.")
 else:
-    print("The model predicts that Jayson Tatum will score under 29.5 Points in today's game.")
+    print("The model predicts that Jayson Tatum will score under 28.5 Points in today's game.")

@@ -5,23 +5,23 @@ from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_sc
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-filepath = 'C:\\Users\\Lazaro B\\Documents\\GitHub\\NBAProject\\data\\DangeloRussell\\DangeloRussellGameEntireCareer.csv'
+filepath = 'C:\\Users\\Lazaro B\\Documents\\GitHub\\NBAProject\\data\\KevinDurant\\KevinDurantGameEntireCareer.csv'
 data = pd.read_csv(filepath)
 data['GAME_DATE'] = pd.to_datetime(data['GAME_DATE'])
 
 data['HOME'] = data['MATCHUP'].apply(lambda x: 1 if 'vs.' in x else 0)
 data['OPPONENT'] = data['MATCHUP'].apply(lambda x: x.split()[-1])
 
-features = ['HOME', 'AST', 'STL', 'REB', 'TOV', 'FG3M', 'FG3A', 'BLK']
-target = 'PTS'
+features = ['HOME', 'PTS', 'STL', 'REB', 'TOV', 'FG3M', 'FG3A', 'BLK']
+target = 'AST'
 
 X = data[features]
 y = data[target]
 
-# Binarize the target variable based on the threshold of 15.5 points
-y = y.apply(lambda x: 1 if x > 15.5 else 0)
+# Binarize the target variable based on the threshold of 5.5 assists
+y = y.apply(lambda x: 1 if x > 5.5 else 0)
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4, random_state=42)
 
 # Initialize the Logistic Regression model
 logistic_regression_model = LogisticRegression()
@@ -45,20 +45,20 @@ conf_matrix = confusion_matrix(y_test, predictions)
 sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='Blues')
 plt.xlabel('Predicted')
 plt.ylabel('True')
-plt.title('Confusion Matrix - Will Dangelo Russell get Over 15.5 points?')
+plt.title('Confusion Matrix - Will Kevin Durant get Over 5.5 assists?')
 plt.show()
 
 # Input the feature values for today's game
 # Replace these values with the relevant data for the game
 today_game = {
-    'HOME': 0,  # 1 for home, 0 for away
-    'AST': 6.0,   # Average assists
-    'STL': 0.8,   # Average steals
-    'REB': 2.8,   # Average rebounds
-    'TOV': 1.8,   # Average turnovers
-    'FG3M': 2.6,  # Average made 3-point field goals
-    'FG3A': 6.8,  # Average attempted 3-point field goals
-    'BLK': 0.4    # Average blocks
+    'HOME': 1,  # 1 for home, 0 for away
+    'PTS': 28.6,   # Average assists
+    'STL': 1.0,   # Average steals
+    'REB': 9.0,   # Average rebounds
+    'TOV': 3.8,   # Average turnovers
+    'FG3M': 2.2,  # Average made 3-point field goals
+    'FG3A': 5.6,  # Average attempted 3-point field goals
+    'BLK': 1.2    # Average blocks
 }
 
 # Convert the dictionary to a DataFrame
@@ -69,6 +69,6 @@ today_game_prediction = logistic_regression_model.predict(today_game_df)
 
 # Interpret the prediction
 if today_game_prediction[0] == 1:
-    print("The model predicts that Dangelo Russell will score over 15.5 points in today's game.")
+    print("The model predicts that Kevin Durant will score over 5.5 assists in today's game.")
 else:
-    print("The model predicts that Dangelo Russell will score under 15.5 points in today's game.")
+    print("The model predicts that Kevin Durant will score under 5.5 assists in today's game.")

@@ -18,7 +18,7 @@ target = 'PTS'
 X = data[features]
 y = data[target]
 
-# Binarize the target variable based on the threshold of 25.0 Points
+# Binarize the target variable based on the threshold of 26.0 Points
 y = y.apply(lambda x: 1 if x > 24.5 else 0)
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
@@ -45,20 +45,20 @@ conf_matrix = confusion_matrix(y_test, predictions)
 sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='Blues')
 plt.xlabel('Predicted')
 plt.ylabel('True')
-plt.title('Confusion Matrix - Will Anthony Davis get Over 25.0 Points?')
+plt.title('Confusion Matrix - Will Anthony Davis get Over 26.0 Points?')
 plt.show()
 
 # Input the feature values for today's game
 # Replace these values with the relevant data for the game
 today_game = {
     'HOME': 0,  # 1 for home, 0 for away
-    'AST': 1.8,   # Average assists
+    'AST': 2.2,   # Average assists
     'STL': 1.0,   # Average steals
-    'REB': 14.0,   # Average rebounds
-    'TOV': 2.2,   # Average turnovers
-    'FG3M': 0.6,  # Average made 3-point field goals
-    'FG3A': 1.8,  # Average attempted 3-point field goals
-    'BLK': 3.8    # Average blocks
+    'REB': 16.8,   # Average rebounds
+    'TOV': 2.0,   # Average turnovers
+    'FG3M': 0.4,  # Average made 3-point field goals
+    'FG3A': 2.0,  # Average attempted 3-point field goals
+    'BLK': 3.6    # Average blocks
 }
 
 # Convert the dictionary to a DataFrame
@@ -69,6 +69,6 @@ today_game_prediction = logistic_regression_model.predict(today_game_df)
 
 # Interpret the prediction
 if today_game_prediction[0] == 1:
-    print("The model predicts that Anthony Davis will score over 25.0 Points in today's game.")
+    print("The model predicts that Anthony Davis will score over 26.0 Points in today's game.")
 else:
-    print("The model predicts that Anthony Davis will score under 25.0 Points in today's game.")
+    print("The model predicts that Anthony Davis will score under 26.0 Points in today's game.")

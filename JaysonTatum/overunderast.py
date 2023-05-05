@@ -12,14 +12,14 @@ data['GAME_DATE'] = pd.to_datetime(data['GAME_DATE'])
 data['HOME'] = data['MATCHUP'].apply(lambda x: 1 if 'vs.' in x else 0)
 data['OPPONENT'] = data['MATCHUP'].apply(lambda x: x.split()[-1])
 
-features = ['HOME', 'PTS', 'STL', 'PTS', 'TOV', 'FG3M', 'FG3A', 'BLK']
-target = 'AST'
+features = ['HOME', 'PTS', 'STL', 'REB', 'TOV', 'FG3M', 'AST', 'BLK']
+target = 'FG3A'
 
 X = data[features]
 y = data[target]
 
-# Binarize the target variable based on the threshold of 4.5 assists
-y = y.apply(lambda x: 1 if x > 4.5 else 0)
+# Binarize the target variable based on the threshold of 8.5 FG3A
+y = y.apply(lambda x: 1 if x > 8.5 else 0)
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
@@ -45,20 +45,20 @@ conf_matrix = confusion_matrix(y_test, predictions)
 sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='Blues')
 plt.xlabel('Predicted')
 plt.ylabel('True')
-plt.title('Confusion Matrix - Will Jayson Tatum get Over 4.5 assists?')
+plt.title('Confusion Matrix - Will Jayson Tatum get Over 8.5 FG3A?')
 plt.show()
 
 # Input the feature values for today's game
 # Replace these values with the relevant data for the game
 today_game = {
-    'HOME': 1,  # 1 for home, 0 for away
-    'PTS': 29.6,   # Average assists
-    'STL': 0.8,   # Average steals
-    'REB': 10.0,   # Average points
-    'TOV': 2.0,   # Average turnovers
-    'FG3M': 3.4,  # Average made 3-point field goals
-    'FG3A': 9.8,  # Average attempted 3-point field goals
-    'BLK': 1.4    # Average blocks
+    'HOME': 0,  # 1 for home, 0 for away
+    'PTS': 25.2,   # Average assists
+    'STL': 0.4,   # Average steals
+    'REB': 9.4,   # Average rebounds
+    'TOV': 1.6,   # Average turnovers
+    'FG3M': 2.6,  # Average made 3-point field goals
+    'AST': 5.4,  # Average attempted 3-point field goals
+    'BLK': 1.6    # Average blocks
 }
 
 # Convert the dictionary to a DataFrame
@@ -69,6 +69,6 @@ today_game_prediction = logistic_regression_model.predict(today_game_df)
 
 # Interpret the prediction
 if today_game_prediction[0] == 1:
-    print("The model predicts that Jayson Tatum will score over 4.5 assists in today's game.")
+    print("The model predicts that Jayson Tatum will score over 8.5 FG3A in today's game.")
 else:
-    print("The model predicts that Jayson Tatum will score under 4.5 assists in today's game.")
+    print("The model predicts that Jayson Tatum will score under 8.5 FG3A in today's game.")
