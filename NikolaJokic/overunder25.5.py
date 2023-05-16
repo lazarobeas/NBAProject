@@ -12,16 +12,16 @@ data['GAME_DATE'] = pd.to_datetime(data['GAME_DATE'])
 data['HOME'] = data['MATCHUP'].apply(lambda x: 1 if 'vs.' in x else 0)
 data['OPPONENT'] = data['MATCHUP'].apply(lambda x: x.split()[-1])
 
-features = ['HOME', 'AST', 'STL', 'PTS', 'TOV', 'FG3M', 'FG3A', 'BLK']
-target = 'REB'
+features = ['HOME', 'AST', 'STL', 'REB', 'TOV', 'FG3M', 'FG3A', 'BLK']
+target = 'PTS'
 
 X = data[features]
 y = data[target]
 
-# Binarize the target variable based on the threshold of 14.0 rebounds
-y = y.apply(lambda x: 1 if x > 14.0 else 0)
+# Binarize the target variable based on the threshold of 28.5 points
+y = y.apply(lambda x: 1 if x > 28.5 else 0)
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.5, random_state=42)
 
 # Initialize the Logistic Regression model
 logistic_regression_model = LogisticRegression()
@@ -45,20 +45,20 @@ conf_matrix = confusion_matrix(y_test, predictions)
 sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='Blues')
 plt.xlabel('Predicted')
 plt.ylabel('True')
-plt.title('Confusion Matrix - Will Nikola Jokic get Over 14.0 rebounds?')
+plt.title('Confusion Matrix - Will Nikola Jokic get Over 28.5 points?')
 plt.show()
 
 # Input the feature values for today's game
 # Replace these values with the relevant data for the game
 today_game = {
-    'HOME': 0,  # 1 for home, 0 for away
-    'AST': 8.0,   # Average assists
-    'STL': 1.4,   # Average steals
-    'PTS': 30.8,   # Average rebounds
-    'TOV': 3.2,   # Average turnovers
-    'FG3M': 2.6,  # Average made 3-point field goals
-    'FG3A': 5.4,  # Average attempted 3-point field goals
-    'BLK': 0.4    # Average blocks
+    'HOME': 1,  # 1 for home, 0 for away
+    'AST': 11.4,   # Average assists
+    'STL': 1.2,   # Average steals
+    'REB': 12.0,   # Average rebounds
+    'TOV': 4.2,   # Average turnovers
+    'FG3M': 1.4,  # Average made 3-point field goals
+    'FG3A': 3.2,  # Average attempted 3-point field goals
+    'BLK': 1.2    # Average blocks
 }
 
 # Convert the dictionary to a DataFrame
@@ -69,6 +69,6 @@ today_game_prediction = logistic_regression_model.predict(today_game_df)
 
 # Interpret the prediction
 if today_game_prediction[0] == 1:
-    print("The model predicts that Nikola Jokic will score over 14.0 rebounds in today's game.")
+    print("The model predicts that Nikola Jokic will score over 28.5 points in today's game.")
 else:
-    print("The model predicts that Nikola Jokic will score under 14.0 rebounds in today's game.")
+    print("The model predicts that Nikola Jokic will score under 28.5 points in today's game.")

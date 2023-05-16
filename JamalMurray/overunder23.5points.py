@@ -52,12 +52,12 @@ plt.show()
 # Replace these values with the relevant data for the game
 today_game = {
     'HOME': 1,  # 1 for home, 0 for away
-    'AST': 6.6,   # Average assists
+    'AST': 6.0,   # Average assists
     'STL': 1.4,   # Average steals
-    'REB': 5.0,   # Average rebounds
-    'TOV': 3.0,   # Average turnovers
-    'FG3M': 4.0,  # Average made 3-point field goals
-    'FG3A': 8.4,  # Average attempted 3-point field goals
+    'REB': 4.8,   # Average rebounds
+    'TOV': 2.0,   # Average turnovers
+    'FG3M': 1.6,  # Average made 3-point field goals
+    'FG3A': 5.8,  # Average attempted 3-point field goals
     'BLK': 0.2    # Average blocks
 }
 

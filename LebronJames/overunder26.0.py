@@ -52,13 +52,13 @@ plt.show()
 # Replace these values with the relevant data for the game
 today_game = {
     'HOME': 0,  # 1 for home, 0 for away
-    'AST': 5.4,   # Average assists
-    'STL': 0.6,   # Average steals
-    'REB': 11.0,   # Average rebounds
-    'TOV': 3.2,   # Average turnovers
-    'FG3M': 1.0,  # Average made 3-point field goals
-    'FG3A': 6.6,  # Average attempted 3-point field goals
-    'BLK': 1.4    # Average blocks
+    'AST': 5.8,   # Average assists
+    'STL': 1.0,   # Average steals
+    'REB': 8.4,   # Average rebounds
+    'TOV': 1.8,   # Average turnovers
+    'FG3M': 2.4,  # Average made 3-point field goals
+    'FG3A': 6.2,  # Average attempted 3-point field goals
+    'BLK': 0.8    # Average blocks
 }
 
 # Convert the dictionary to a DataFrame
