@@ -18,8 +18,8 @@ target = 'PTS'
 X = data[features]
 y = data[target]
 
-# Binarize the target variable based on the threshold of 30.5 points
-y = y.apply(lambda x: 1 if x > 30.5 else 0)
+# Binarize the target variable based on the threshold of 27.0 points
+y = y.apply(lambda x: 1 if x > 27.0 else 0)
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
@@ -45,20 +45,20 @@ conf_matrix = confusion_matrix(y_test, predictions)
 sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='Blues')
 plt.xlabel('Predicted')
 plt.ylabel('True')
-plt.title('Confusion Matrix - Will Jimmy Butler get Over 30.5 points?')
+plt.title('Confusion Matrix - Will Jimmy Butler get Over 27.0 points?')
 plt.show()
 
 # Input the feature values for today's game
 # Replace these values with the relevant data for the game
 today_game = {
     'HOME': 0,  # 1 for home, 0 for away
-    'AST': 4.8,   # Average assists
+    'AST': 6.0,   # Average assists
     'STL': 1.8,   # Average steals
-    'REB': 6.0,   # Average rebounds
-    'TOV': 2.4,   # Average turnovers
-    'FG3M': 2.4,  # Average made 3-point field goals
-    'FG3A': 5.4,  # Average attempted 3-point field goals
-    'BLK': 0.4    # Average blocks
+    'REB': 8.0,   # Average rebounds
+    'TOV': 1.8,   # Average turnovers
+    'FG3M': 1.2,  # Average made 3-point field goals
+    'FG3A': 3.6,  # Average attempted 3-point field goals
+    'BLK': 0.2    # Average blocks
 }
 
 # Convert the dictionary to a DataFrame
@@ -69,6 +69,6 @@ today_game_prediction = logistic_regression_model.predict(today_game_df)
 
 # Interpret the prediction
 if today_game_prediction[0] == 1:
-    print("The model predicts that Jimmy Butler will score over 30.5 points in today's game.")
+    print("The model predicts that Jimmy Butler will score over 27.0 points in today's game.")
 else:
-    print("The model predicts that Jimmy Butler will score under 30.5 points in today's game.")
+    print("The model predicts that Jimmy Butler will score under 27.0 points in today's game.")

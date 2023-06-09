@@ -18,8 +18,8 @@ target = 'PTS'
 X = data[features]
 y = data[target]
 
-# Binarize the target variable based on the threshold of 21.5 points
-y = y.apply(lambda x: 1 if x > 21.5 else 0)
+# Binarize the target variable based on the threshold of 25.5 points
+y = y.apply(lambda x: 1 if x > 25.5 else 0)
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
@@ -45,7 +45,7 @@ conf_matrix = confusion_matrix(y_test, predictions)
 sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='Blues')
 plt.xlabel('Predicted')
 plt.ylabel('True')
-plt.title('Confusion Matrix - Will Dejounte Murray get Over 21.5 points?')
+plt.title('Confusion Matrix - Will Dejounte Murray get Over 25.5 points?')
 plt.show()
 
 # Input the feature values for today's game
@@ -69,6 +69,6 @@ today_game_prediction = logistic_regression_model.predict(today_game_df)
 
 # Interpret the prediction
 if today_game_prediction[0] == 1:
-    print("The model predicts that Dejounte Murray will score over 21.5 points in today's game.")
+    print("The model predicts that Dejounte Murray will score over 25.5 points in today's game.")
 else:
-    print("The model predicts that Dejounte Murray will score under 21.5 points in today's game.")
+    print("The model predicts that Dejounte Murray will score under 25.5 points in today's game.")

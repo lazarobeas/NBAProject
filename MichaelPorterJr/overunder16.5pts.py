@@ -18,8 +18,8 @@ target = 'PTS'
 X = data[features]
 y = data[target]
 
-# Binarize the target variable based on the threshold of 15.0 points
-y = y.apply(lambda x: 1 if x > 15.0 else 0)
+# Binarize the target variable based on the threshold of 15.5 points
+y = y.apply(lambda x: 1 if x > 15.5 else 0)
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
@@ -45,20 +45,20 @@ conf_matrix = confusion_matrix(y_test, predictions)
 sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='Blues')
 plt.xlabel('Predicted')
 plt.ylabel('True')
-plt.title('Confusion Matrix - Will Michael Porter Jr get Over 15.0 points?')
+plt.title('Confusion Matrix - Will Michael Porter Jr get Over 15.5 points?')
 plt.show()
 
 # Input the feature values for today's game
 # Replace these values with the relevant data for the game
 today_game = {
-    'HOME': 0,  # 1 for home, 0 for away
-    'AST': 5.8,   # Average assists
-    'STL': 1.0,   # Average steals
+    'HOME': 1,  # 1 for home, 0 for away
+    'AST': 2.4,   # Average assists
+    'STL': 0.2,   # Average steals
     'REB': 8.4,   # Average rebounds
-    'TOV': 1.8,   # Average turnovers
-    'FG3M': 2.4,  # Average made 3-point field goals
-    'FG3A': 6.2,  # Average attempted 3-point field goals
-    'BLK': 0.8    # Average blocks
+    'TOV': 1.0,   # Average turnovers
+    'FG3M': 4.8,  # Average made 3-point field goals
+    'FG3A': 11.8,  # Average attempted 3-point field goals
+    'BLK': 0.6   # Average blocks
 }
 
 # Convert the dictionary to a DataFrame
@@ -69,6 +69,6 @@ today_game_prediction = logistic_regression_model.predict(today_game_df)
 
 # Interpret the prediction
 if today_game_prediction[0] == 1:
-    print("The model predicts that Michael Porter Jr will score over 15.0 points in today's game.")
+    print("The model predicts that Michael Porter Jr will score over 15.5 points in today's game.")
 else:
-    print("The model predicts that Michael Porter Jr will score under 15.0 points in today's game.")
+    print("The model predicts that Michael Porter Jr will score under 15.5 points in today's game.")

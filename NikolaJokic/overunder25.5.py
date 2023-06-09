@@ -18,10 +18,10 @@ target = 'PTS'
 X = data[features]
 y = data[target]
 
-# Binarize the target variable based on the threshold of 28.5 points
-y = y.apply(lambda x: 1 if x > 28.5 else 0)
+# Binarize the target variable based on the threshold of 27.5 pts
+y = y.apply(lambda x: 1 if x > 27.5 else 0)
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.5, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.40, random_state=42)
 
 # Initialize the Logistic Regression model
 logistic_regression_model = LogisticRegression()
@@ -45,19 +45,19 @@ conf_matrix = confusion_matrix(y_test, predictions)
 sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='Blues')
 plt.xlabel('Predicted')
 plt.ylabel('True')
-plt.title('Confusion Matrix - Will Nikola Jokic get Over 28.5 points?')
+plt.title('Confusion Matrix - Will Nikola Jokic get Over 27.5 pts?')
 plt.show()
 
 # Input the feature values for today's game
 # Replace these values with the relevant data for the game
 today_game = {
     'HOME': 1,  # 1 for home, 0 for away
-    'AST': 11.4,   # Average assists
-    'STL': 1.2,   # Average steals
-    'REB': 12.0,   # Average rebounds
-    'TOV': 4.2,   # Average turnovers
-    'FG3M': 1.4,  # Average made 3-point field goals
-    'FG3A': 3.2,  # Average attempted 3-point field goals
+    'AST': 11.8,   # Average assists
+    'STL': 1.6,   # Average steals
+    'REB': 13.6,   # Average rebounds
+    'TOV': 3.4,   # Average turnovers
+    'FG3M': 1.6,  # Average made 3-point field goals
+    'FG3A': 3.6,  # Average attempted 3-point field goals
     'BLK': 1.2    # Average blocks
 }
 
@@ -69,6 +69,6 @@ today_game_prediction = logistic_regression_model.predict(today_game_df)
 
 # Interpret the prediction
 if today_game_prediction[0] == 1:
-    print("The model predicts that Nikola Jokic will score over 28.5 points in today's game.")
+    print("The model predicts that Nikola Jokic will score over 27.5 pts in today's game.")
 else:
-    print("The model predicts that Nikola Jokic will score under 28.5 points in today's game.")
+    print("The model predicts that Nikola Jokic will score under 27.5 pts in today's game.")

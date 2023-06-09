@@ -5,7 +5,7 @@ from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_sc
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-filepath = 'C:\\Users\\Lazaro B\\Documents\\GitHub\\NBAProject\\data\\JaysonTatum\\JaysonTatumGameEntireCareer.csv'
+filepath = 'C:\\Users\\Lazaro B\\Documents\\GitHub\\NBAProject\\data\\ClintCapela\\ClintCapelaGameEntireCareer.csv'
 data = pd.read_csv(filepath)
 data['GAME_DATE'] = pd.to_datetime(data['GAME_DATE'])
 

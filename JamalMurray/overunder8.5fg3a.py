@@ -18,10 +18,10 @@ target = 'FG3A'
 X = data[features]
 y = data[target]
 
-# Binarize the target variable based on the threshold of 8.5 FG3A
-y = y.apply(lambda x: 1 if x > 8.5 else 0)
+# Binarize the target variable based on the threshold of 8.0 FG3A
+y = y.apply(lambda x: 1 if x > 8.0 else 0)
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4, random_state=42)
 
 # Initialize the Logistic Regression model
 logistic_regression_model = LogisticRegression()
@@ -45,19 +45,19 @@ conf_matrix = confusion_matrix(y_test, predictions)
 sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='Blues')
 plt.xlabel('Predicted')
 plt.ylabel('True')
-plt.title('Confusion Matrix - Will Jamal Murray get Over 8.5 FG3A?')
+plt.title('Confusion Matrix - Will Jamal Murray get Over 8.0 FG3A?')
 plt.show()
 
 # Input the feature values for today's game
 # Replace these values with the relevant data for the game
 today_game = {
     'HOME': 1,  # 1 for home, 0 for away
-    'AST': 6.6,   # Average assists
-    'STL': 1.4,   # Average steals
-    'REB': 5.0,   # Average rebounds
-    'TOV': 3.0,   # Average turnovers
-    'FG3M': 4.0,  # Average made 3-point field goals
-    'PTS': 29.5,  # Average attempted 3-point field goals
+    'AST': 5.0,   # Average assists
+    'STL': 3.0,   # Average steals
+    'REB': 5.8,   # Average rebounds
+    'TOV': 2.0,   # Average turnovers
+    'FG3M': 3.8,  # Average made 3-point field goals
+    'PTS': 31.2,  # Average attempted 3-point field goals
     'BLK': 0.2    # Average blocks
 }
 
@@ -69,6 +69,6 @@ today_game_prediction = logistic_regression_model.predict(today_game_df)
 
 # Interpret the prediction
 if today_game_prediction[0] == 1:
-    print("The model predicts that Jamal Murray will score over 8.5 FG3A in today's game.")
+    print("The model predicts that Jamal Murray will score over 8.0 FG3A in today's game.")
 else:
-    print("The model predicts that Jamal Murray will score under 8.5 FG3A in today's game.")
+    print("The model predicts that Jamal Murray will score under 8.0 FG3A in today's game.")
