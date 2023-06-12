@@ -19,8 +19,8 @@ target = 'PTS'
 X = data[features]
 y = data[target]
 
-# Binarize the target variable based on the threshold of 12.5 points
-y = y.apply(lambda x: 1 if x > 12.5 else 0)
+# Binarize the target variable based on the threshold of 12.0 points
+y = y.apply(lambda x: 1 if x > 12.0 else 0)
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4, random_state=42)
 
@@ -30,7 +30,7 @@ logistic_regression_model = LogisticRegression()
 # Train the model
 logistic_regression_model.fit(X_train, y_train)
 
-dump(logistic_regression_model, 'ou12.5ptsmodel.pkl')  # 'model.pkl' is the filename
+dump(logistic_regression_model, 'ou12.0ptsmodel.pkl')  # 'model.pkl' is the filename
 
 
 # Make predictions
@@ -49,7 +49,7 @@ conf_matrix = confusion_matrix(y_test, predictions)
 sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='Blues')
 plt.xlabel('Predicted')
 plt.ylabel('True')
-plt.title('Confusion Matrix - Will Aaron Gordon get Over 12.5 points?')
+plt.title('Confusion Matrix - Will Aaron Gordon get Over 12.0 points?')
 plt.show()
 
 # Input the feature values for today's game
@@ -73,6 +73,6 @@ today_game_prediction = logistic_regression_model.predict(today_game_df)
 
 # Interpret the prediction
 if today_game_prediction[0] == 1:
-    print("The model predicts that Aaron Gordon will score over 12.5 points in today's game.")
+    print("The model predicts that Aaron Gordon will score over 12.0 points in today's game.")
 else:
-    print("The model predicts that Aaron Gordon will score under 12.5 points in today's game.")
+    print("The model predicts that Aaron Gordon will score under 12.0 points in today's game.")
