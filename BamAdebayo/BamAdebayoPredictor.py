@@ -6,8 +6,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler
 
-
-filepath = 'C:\\Users\\Lazaro B\\Documents\\GitHub\\NBAProject\\data\\NikolaJokic\\NikolaJokicGameEntireCareer.csv'
+filepath = 'C:\\Users\\Lazaro B\\Documents\\GitHub\\NBAProject\\data\\BamAdebayo\\BamAdebayoGameEntireCareer.csv'
 data = pd.read_csv(filepath)
 data['GAME_DATE'] = pd.to_datetime(data['GAME_DATE'], format='%b %d, %Y')
 
@@ -56,11 +55,11 @@ conf_matrix = confusion_matrix(y_test, predictions)
 sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='Blues')
 plt.xlabel('Predicted')
 plt.ylabel('True')
-plt.title(f'Confusion Matrix - Nikola Jokic Simulated with {point_threshold} points')
+plt.title(f'Confusion Matrix - Bam Adebayo Simulated with {point_threshold} points')
 plt.show()
 
 # Input the feature values for today's game
-print("Enter Nikola Jokic's stats for the last 5 games:\n")
+print("Enter Bam Adebayo's stats for the last 5 games:\n")
 today_game = {
     'HOME': int(input("Home court advantage? (1 for home, 0 for away): ")),
     'AST': float(input("Average assists: ")),
@@ -88,7 +87,6 @@ today_game_prediction = logistic_regression_model.predict(today_game_scaled)
 
 # Interpret the prediction
 if today_game_prediction[0] == 1:
-    print(f"\nThe model predicts that Nikola Jokic will score over {point_threshold} points in today's game.")
+    print(f"\nThe model predicts that Bam Adebayo will score over {point_threshold} points in today's game.")
 else:
-    print(f"\nThe model predicts that Nikola Jokic will score under {point_threshold} points in today's game.")
-
+    print(f"\nThe model predicts that Bam Adebayo will score under {point_threshold} points in today's game.")

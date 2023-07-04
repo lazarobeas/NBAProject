@@ -7,7 +7,7 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_absolute_error, mean_squared_error
 import matplotlib.pyplot as plt
 
-filepath = 'C:\\Users\\Lazaro B\\Documents\\GitHub\\NBAProject\\data\\DraymondGreen\\DraymondGreenGameEntireCareer.csv'
+filepath = 'C:\\Users\\Lazaro B\\Documents\\GitHub\\NBAProject\\data\\NikolaJokic\\DraymondGreenGameEntireCareer.csv'
 data = pd.read_csv(filepath)
 data['GAME_DATE'] = pd.to_datetime(data['GAME_DATE'])
 
