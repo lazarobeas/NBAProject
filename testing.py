@@ -3,7 +3,7 @@ import pandas as pd
 from nba_api.stats.endpoints import PlayerDashboardByGameSplits, PlayerGameLog
 
 
-capelaid = players.find_players_by_full_name("Jewell Loyd")[0]['id']
+capelaid = players.find_players_by_full_name("Anthony Davis")[0]['id']
 
 print()
 

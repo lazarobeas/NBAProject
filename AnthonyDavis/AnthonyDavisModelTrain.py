@@ -7,7 +7,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 
 # Path of bucket
-path = "s3://playersentirecareer/NikolaJokic/NikolaJokicGameEntireCareer.csv"
+path = "s3://playersentirecareer/AnthonyDavis/AnthonyDavisGameEntireCareer.csv"
 
 # Use pandas to read the file directly from S3
 data = pd.read_csv(path, index_col=0)
@@ -35,5 +35,5 @@ logistic_regression_model = LogisticRegression(max_iter=1000)
 logistic_regression_model.fit(X_train, y_train)
 
 # Save the trained model and the scaler to a file
-dump(logistic_regression_model, 'jokic_model.joblib')
-dump(scaler, 'jokic_scaler.joblib')
+dump(logistic_regression_model, 'davis-model.joblib')
+dump(scaler, 'davis-scaler.joblib')

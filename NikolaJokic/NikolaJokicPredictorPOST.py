@@ -1,8 +1,6 @@
 from flask import Flask, request, jsonify
 import pandas as pd
 from flask_cors import CORS
-from sklearn.linear_model import LogisticRegression
-from sklearn.preprocessing import StandardScaler
 from joblib import load
 
 app = Flask(__name__)
